@@ -1,0 +1,43 @@
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <title>mongodb crud</title>
+    </head>
+    <body>
+        <h1>mongodb crud</h1>
+        {{message}}
+        <br />
+        {{#if edit_id}}
+            <h3>Edit</h3>
+            <form method='post' action='/update_book/{{edit_id}}'>
+                <label for=''>title</label>
+                <input type='text' name='title' value='{{edit_book.title}}' />
+                <label for=''>author</label>
+                <input type='text' name='author' value='{{edit_book.author}}' />
+                <button type='submit'>submit</button>
+            </form><br /><br />
+        {{else}}
+            <h3>Create</h3>
+            <form method='post' action='/store_book'>
+                <label for=''>title</label>
+                <input type='text' name='title' />
+                <label for=''>author</label>
+                <input type='text' name='author' />
+                <button type='submit'>submit</button>
+            </form><br /><br />
+        {{/if}}
+
+        <ul>
+            {{#each books}}
+                <li>{{this.title}}
+                    -
+                    {{this.author}}
+                    <a href='/?edit_id={{this._id}}'>Edit</a></li>
+                    <a href='/?delete_id={{this._id}}' onclick="return confirm('are you sure want to delete')">Delete</a></li>
+            {{/each}}
+        </ul>
+
+    </body>
+</html>
+
